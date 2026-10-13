@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!ctx) {
         console.error("مرورگر امکان ساخت تصویر CAPTCHA را ندارد.");
         return;
-    }
+    })
 
     let captchaCode = "";
 
@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
             captchaCode += characters[
                 Math.floor(Math.random() * characters.length)
             ];
-        }
+        })
 
         // پس‌زمینه
         ctx.clearRect(0, 0, canvas.width, canvas.height);
