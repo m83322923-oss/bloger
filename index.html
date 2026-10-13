@@ -271,6 +271,14 @@ document.addEventListener("DOMContentLoaded", () => {
             "نمونه اولیه فرم با موفقیت بررسی شد.\n" +
             "برای ثبت‌نام واقعی باید سرور متصل شود."
         );
+
+        // پس از بررسی موفق، کد جدید تولید می‌شود.
+        generateCaptcha();
+    });
+
+    // نمایش اولیه کد امنیتی
+    generateCaptcha();
+});
 </script>
 
 
