@@ -128,6 +128,76 @@ required
 
             message.className = "message info";
         });
+        <script>
+  const canvas = document.getElementById("captchaCanvas");
+  const ctx = canvas.getContext("2d");
+  const captchaInput = document.getElementById("captchaInput");
+  const captchaMessage = document.getElementById("captchaMessage");
+  const refreshButton = document.getElementById("refreshCaptcha");
+
+  let captchaCode = "";
+
+  function generateCaptcha() {
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    captchaCode = "";
+
+    for (let i = 0; i < 6; i++) {
+      captchaCode += chars[Math.floor(Math.random() * chars.length)];
+    }
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#f3edff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // خطوط مزاحم
+    for (let i = 0; i < 5; i++) {
+      ctx.beginPath();
+      ctx.strokeStyle = hsl(${Math.random() * 360}, 60%, 60%);
+      ctx.lineWidth = 1;
+      ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+      ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
+      ctx.stroke();
+    }
+
+    // حروف و اعداد
+    ctx.font = "bold 25px Arial";
+    ctx.textBaseline = "middle";
+
+    for (let i = 0; i < captchaCode.length; i++) {
+      ctx.save();
+      ctx.translate(18 + i * 23, 25);
+      ctx.rotate((Math.random() - 0.5) * 0.35);
+      ctx.fillStyle = "#241448";
+      ctx.fillText(captchaCode[i], 0, 0);
+      ctx.restore();
+    }
+
+    captchaInput.value = "";
+    captchaMessage.textContent = "";
+    captchaMessage.className = "captcha-message";
+  }
+
+  refreshButton.addEventListener("click", generateCaptcha);
+
+  // این تابع را در زمان بررسی فرم فراخوانی کن.
+  function validateCaptcha() {
+    const enteredCode = captchaInput.value.trim().toUpperCase();
+
+    if (enteredCode !== captchaCode) {
+      captchaMessage.textContent = "کد امنیتی اشتباه است؛ دوباره تلاش کنید.";
+      captchaMessage.className = "captcha-message error";
+      generateCaptcha();
+      return false;
+    }
+
+    captchaMessage.textContent = "کد امنیتی درست است.";
+    captchaMessage.className = "captcha-message success";
+    generateCaptcha();
+    return true;
+  }
+
+  generateCaptcha();
+</script>
     </script>
 
 </body>
