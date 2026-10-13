@@ -69,7 +69,27 @@
                         required
                     >
                 </div>
+<div class="captcha-section">
+  <label for="captchaInput">کد امنیتی را وارد کنید</label>  <div class="captcha-row">
+    <canvas id="captchaCanvas" width="150" height="50"
+      aria-label="تصویر کد امنیتی"></canvas><button type="button" id="refreshCaptcha"
+  class="refresh-captcha" aria-label="ساخت کد جدید">
+  ↻
+</button>
 
+  </div><input
+type="text"
+id="captchaInput"
+placeholder="کد داخل تصویر"
+maxlength="6"
+autocomplete="off"
+required
+
+«»
+
+  <p id="captchaMessage" class="captcha-message"
+    role="status" aria-live="polite"></p>
+</div>
                 <button type="submit" class="submit-btn">
                     ثبت‌نام در قرعه‌کشی
                     <span>←</span>
